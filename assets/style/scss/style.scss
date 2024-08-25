@@ -143,6 +143,21 @@ rgba(75, 105, 255, 1) - para azul
           }
         }
       }
+      button {
+        cursor: pointer;
+        width: 100%;
+        max-width: 70%;
+        padding: 10px;
+        margin: auto;
+        text-align: center;
+        color: #fff;
+        background-color: #4b69ff;
+        border: none;
+        border-radius: 5px;
+        &:hover {
+          background-color: rgba(28, 29, 34, 0.5);
+        }
+      }
     }
 
     .previa {
