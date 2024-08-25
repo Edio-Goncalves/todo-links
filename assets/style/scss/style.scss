@@ -1,3 +1,198 @@
-* {
-  background-color: #f3f3f3;
+@use "forward" as fw;
+
+/* 
+rgba(28, 29, 34, 1) - textos em destaque
+rgba(28, 29, 34, 0.5) - textos
+rgba(28, 29, 34, 0.04) - para o fundo
+rgba(255, 121, 121, 1) - para erros
+rgba(120, 215, 0, 1) - para verde
+rgba(255, 160, 72, 1) - para laranja
+rgba(75, 105, 255, 1) - para azul 
+*/
+
+.todo {
+  width: 100%;
+  max-width: 748px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  // align-items: center;
+  font-family: "Exo 2", sans-serif;
+  font-size: 14px;
+  h1 {
+    color: rgba(28, 29, 34, 1);
+    padding: 10px;
+    font-size: 36px;
+    font-weight: 700;
+  }
+}
+
+/* register */
+.register {
+  padding-bottom: 10px;
+  border-bottom: 2px dashed rgba(28, 29, 34, 0.5);
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    h2 {
+      font-size: 20px;
+      font-weight: 400;
+    }
+    .wrapper-input {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .form-field {
+        display: block;
+        width: 100%;
+        padding: 3px 10px;
+        line-height: 20px;
+        font-size: 14px;
+        font-weight: 500;
+        font-family: inherit;
+        border-radius: 6px;
+        color: #99a3ba;
+        border: 1px solid #cdd9ed;
+        background: #fff;
+        transition: border 0.3s ease;
+        &::placeholder {
+          color: #cbd1dc;
+        }
+        &:focus {
+          outline: none;
+          border-color: rgba(75, 105, 255, 1);
+        }
+      }
+
+      .form-inpt {
+        position: relative;
+        display: flex;
+        width: 100%;
+        & > span,
+        .form-field {
+          white-space: nowrap;
+          display: block;
+          &:not(:first-child):not(:last-child) {
+            border-radius: 0;
+            max-width: 100px;
+          }
+          &:first-child {
+            border-radius: 6px 0 0 6px;
+          }
+          &:last-child {
+            border-radius: 0 6px 6px 0;
+          }
+          &:not(:first-child) {
+            margin-left: -1px;
+          }
+        }
+        .form-field {
+          position: relative;
+          z-index: 1;
+          flex: 1 1 auto;
+          width: 1%;
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+
+        & > span {
+          text-align: center;
+          padding: 8px 12px;
+          font-size: 14px;
+          line-height: 25px;
+          color: #99a3ba;
+          background: #eef4ff;
+          border: 1px solid #cdd9ed;
+          transition: 0.3s ease, border 0.3s ease, color 0.3s ease;
+          &.second {
+            background-color: transparent;
+            border: none;
+          }
+        }
+        &:focus-within {
+          & > span {
+            color: #fff;
+            background: rgba(75, 105, 255, 1);
+            border-color: rgba(75, 105, 255, 1);
+            &.second {
+              color: rgba(28, 29, 34, 1);
+              background-color: transparent;
+              border: none;
+            }
+          }
+        }
+
+        > div {
+          margin-left: 20px;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 3px;
+          max-width: 50%;
+          div {
+            cursor: pointer;
+            display: flex;
+            gap: 10px;
+            border: 1px solid rgba(28, 29, 34, 0.5);
+            height: 17px;
+            width: 17px;
+          }
+        }
+      }
+    }
+
+    .previa {
+      padding: 5px;
+      border-radius: 5px;
+      background: #eef4ff;
+      cursor: not-allowed;
+      > div {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        height: 43px;
+        padding: 3px 10px;
+        line-height: 28px;
+        font-size: 14px;
+        font-weight: 400;
+        border-radius: 4px;
+        color: #8b8b8b;
+        border: 1px solid #cdd9ed;
+        background: #fff;
+      }
+    }
+  }
+}
+
+/* search */
+.search {
+  form {
+    justify-content: space-around;
+    display: flex;
+
+    > :first-child {
+      background-color: aqua;
+      display: flex;
+      flex-direction: column;
+    }
+    > :nth-child(2) {
+      background-color: rgb(200, 255, 0);
+      display: flex;
+      flex-direction: column;
+    }
+    > :last-child {
+      background-color: rgb(0, 255, 115);
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+/* listing */
+.listing {
+  background-color: rgb(141, 252, 141);
 }
