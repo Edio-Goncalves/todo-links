@@ -19,31 +19,18 @@ logout.addEventListener("click", () => {
 });
 
 /* fake links */
-const fakeLinks = [
-  {
-    link: "https://www.youtube.com/watch?v=doR4tpkCJ-E&list=PLMbclvogjXZVxxN06cefN7q5nyt7u5dUq&index=20",
-    linkName: "nomeDoLink",
-    tag: "tagFake",
-    user: {
-      uid: "g21ACrqLoKh5C8xB6KlGAFue2iz1",
-    },
-  },
-  {
-    link: "https://www.youtube.com/watch?v=doR4tpkCJ-E&list=PLMbclvogjXZVxxN06cefN7q5nyt7u5dUq&index=20",
-    linkName: "nomeDoLink0022",
-    tag: "tagFake0022",
-    user: {
-      uid: "g21ACrqLoKh5C8xB6KlGAFue2222",
-    },
-  },
-];
 
 findTodolinks();
 
 function findTodolinks() {
-  setTimeout(() => {
-    addTodolinksToScreen(fakeLinks);
-  }, 1000);
+  firebase
+    .firestore()
+    .collection("todolinks")
+    .get()
+    .then((snapshot) => {
+      const todoLinksData = snapshot.docs.map((doc) => doc.data());
+      addTodolinksToScreen(todoLinksData);
+    });
 }
 function addTodolinksToScreen(linksTodo) {
   const table = form.tbody();
