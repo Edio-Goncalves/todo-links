@@ -42,6 +42,65 @@ rgba(75, 105, 255, 1) - para azul
   }
 }
 
+/* login */
+.login {
+  font-family: "Exo 2", sans-serif;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+
+  form {
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background-color: fw.$form-color;
+    border: 1px solid fw.$secondary-color;
+    border-radius: 10px;
+
+    > :first-child,
+    > :nth-child(2) {
+      height: 85px;
+      label {
+        font-size: 12px;
+        text-align: left;
+        color: fw.$text-color;
+      }
+      input {
+        @include fw.input-style;
+      }
+
+      > .error {
+        @include fw.error-style;
+      }
+    }
+
+    > :nth-child(3),
+    > :nth-child(4),
+    > :last-child {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      button {
+        @include fw.button-style(
+          fw.$primary-color,
+          fw.$secondary-color,
+          fw.$accent-color
+        );
+
+        &.outline {
+          @include fw.button-style(white, fw.$text-color, fw.$accent-color);
+        }
+      }
+    }
+  }
+}
+
 /* register */
 .register {
   padding-bottom: 10px;
