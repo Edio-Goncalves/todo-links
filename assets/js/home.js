@@ -18,20 +18,28 @@ logout.addEventListener("click", () => {
     });
 });
 
-/* fake links */
+/* Confere usuarios */
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    findTodolinks(user);
+  }
+});
 
-findTodolinks();
+/* firestone.data */
 
-function findTodolinks() {
+function findTodolinks(user) {
   firebase
     .firestore()
     .collection("todolinks")
+    .where("user.uid", "==", user.uid)
     .get()
     .then((snapshot) => {
       const todoLinksData = snapshot.docs.map((doc) => doc.data());
       addTodolinksToScreen(todoLinksData);
     });
 }
+
+/*  imprime os dados */
 function addTodolinksToScreen(linksTodo) {
   const table = form.tbody();
 
