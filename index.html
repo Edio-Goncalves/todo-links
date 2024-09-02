@@ -3,145 +3,74 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tela login</title>
     <link
-      rel="icon"
-      type="image/x-icon"
-      href="/assets/image/icon/favicon.png"
-    />
-    <title>ToDo Links</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&amp;display=swap"
       rel="stylesheet"
+    />
+    <link
+      rel="shortcut icon"
+      href="/assets/image/icon/favicon.png"
+      type="image/x-icon"
     />
     <link rel="stylesheet" href="/assets/style/css/style.css" />
   </head>
-
   <body>
-    <div class="todo">
-      <h1>ToDo LINKS</h1>
-
-      <!-- cadastro -->
-      <section class="register">
-        <form id="formRegister" action="">
-          <h2>Cadastro:</h2>
-          <div class="wrapper-input">
-            <div class="form-inpt">
-              <span>https://</span>
-              <input
-                id="link"
-                class="form-field"
-                type="text"
-                placeholder="insira o link aqui"
-              />
-            </div>
-
-            <div class="form-inpt">
-              <span class="second">Nome</span>
-              <input
-                id="name"
-                class="form-field"
-                type="text"
-                placeholder="24 caracteres"
-              />
-            </div>
-
-            <div class="form-inpt">
-              <span class="second">Tag</span>
-              <input
-                id="tag"
-                class="form-field"
-                type="text"
-                placeholder="11 caracteres"
-              />
-            </div>
-
-            <button id="send">Concluir</button>
+    <div class="login">
+      <form action="">
+        <div>
+          <label>Email</label>
+          <input
+            type="email"
+            name="e-mail"
+            id="email"
+            placeholder="seu@email.com"
+          />
+          <div id="email-required-error" class="error">
+            Email é obrigatório*
           </div>
-        </form>
-      </section>
-
-      <!-- modal -->
-      <div id="editModal" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <h2>Editar Link</h2>
-          <form id="formEdit">
-            <div class="form-inpt">
-              <span>https://</span>
-              <input
-                id="editLink"
-                class="form-field"
-                type="text"
-                placeholder="insira o link aqui"
-              />
-            </div>
-
-            <div class="form-inpt">
-              <span class="second">Nome</span>
-              <input
-                id="editName"
-                class="form-field"
-                type="text"
-                placeholder="24 caracteres"
-              />
-            </div>
-
-            <div class="form-inpt">
-              <span class="second">Tag</span>
-              <input
-                id="editTag"
-                class="form-field"
-                type="text"
-                placeholder="11 caracteres"
-              />
-            </div>
-
-            <button id="saveEdit" type="submit">Salvar</button>
-          </form>
+          <div id="email-invalid-error" class="error">Email é inválido*</div>
         </div>
-      </div>
-
-      <!-- pesquisa -->
-      <section class="search">
-        <form action="">
-          <div>
-            <input type="search" placeholder="search" />
+        <div>
+          <label>Senha</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="senha"
+          />
+          <div id="password-required-error" class="error">
+            Senha é obrigatória*
           </div>
-          <div>
-            <select name="" id="">
-              <option value="color01">TAG's</option>
-              <option value="color02">color02</option>
-              <option value="color03">color03</option>
-            </select>
-          </div>
-        </form>
-      </section>
-
-      <!-- listagem -->
-      <section class="listing">
-        <div class="list-header">
-          <h3>Nome | Tag | Edit/Del</h3>
         </div>
 
-        <table>
-          <tbody>
-            <!-- Linhas serão adicionadas aqui -->
-          </tbody>
-        </table>
-      </section>
-
-      <!-- footer -->
-      <footer class="footer">
-        <h2>ToDo Link</h2>
-        <p>
-          @Criado por
-          <a href="https://github.com/Edio-Goncalves/todo-links"
-            >Edio Gonçalves Junior</a
+        <div>
+          <button
+            class="clear"
+            type="button"
+            id="recover-password-button"
+            disabled
           >
-        </p>
-      </footer>
+            Recuperar senha
+          </button>
+        </div>
+        <div>
+          <button class="solid" type="button" id="login-button" disabled>
+            Entrar
+          </button>
+        </div>
+        <div>
+          <button class="outline" type="button" id="register">Registrar</button>
+        </div>
+      </form>
     </div>
 
-    <script src="/assets/js/script.js"></script>
+    <script src="/assets/js/index.js"></script>
+    <script src="/assets/js/loading.js"></script>
+    <script src="/assets/js/validations.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+    <script src="/assets/js/firebase-init.js"></script>
+    <script src="/assets/js/auth-state.js"></script>
   </body>
 </html>

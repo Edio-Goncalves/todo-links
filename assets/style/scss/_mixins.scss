@@ -1,0 +1,65 @@
+@mixin loading {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(63, 63, 63, 0.25);
+  label {
+    font-family: "exo 2", sans-serif;
+    font-size: 20px;
+  }
+}
+
+@mixin input-style {
+  width: 100%;
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  border-bottom: 1px solid rgb(46, 84, 255);
+  border-top: 1px solid transparent;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  color: rgba(0, 0, 0, 0.8);
+
+  &:focus {
+    outline: none;
+    border-left: 1px solid rgba(46, 84, 255, 0.2);
+    border-top: 1px solid rgba(46, 84, 255, 0.2);
+    border-right: 1px solid rgba(46, 84, 255, 0.2);
+    border-bottom: 1px solid rgba(46, 84, 255, 0.2);
+
+    &::placeholder {
+      color: transparent;
+    }
+  }
+}
+
+@mixin button-style($background-color, $color, $border-color) {
+  cursor: pointer;
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: $background-color;
+  color: $color;
+  border: 1px solid $border-color;
+  border-radius: 5px;
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.7;
+  }
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+@mixin error-style {
+  display: none;
+  font-size: 12px;
+  color: rgba(255, 0, 0, 0.6);
+}

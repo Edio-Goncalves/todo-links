@@ -19,11 +19,26 @@ rgba(75, 105, 255, 1) - para azul
   flex-direction: column;
   font-family: "Exo 2", sans-serif;
   font-size: 14px;
-  h1 {
-    color: rgba(28, 29, 34, 1);
-    padding: 10px;
-    font-size: 36px;
-    font-weight: 700;
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    h1 {
+      color: rgba(28, 29, 34, 1);
+      padding: 10px;
+      font-size: 36px;
+      font-weight: 700;
+    }
+    > button {
+      cursor: pointer;
+      width: 80px;
+      padding: 5px;
+      font-size: 14px;
+      color: white;
+      background-color: fw.$primary-color;
+      border: none;
+      border-radius: 5px;
+    }
   }
 }
 

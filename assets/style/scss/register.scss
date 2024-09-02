@@ -1,0 +1,62 @@
+@use "forward" as fw;
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "exo 2", sans-serif;
+
+  .loading {
+    @include fw.loading;
+  }
+
+  form {
+    width: 330px;
+    padding: 40px;
+    background-color: fw.$form-color;
+
+    border-radius: 10px;
+
+    div {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      input {
+        @include fw.input-style;
+      }
+
+      label {
+        width: 100%;
+        font-size: 16px;
+        margin-bottom: 5px;
+        text-align: left;
+        color: rgba(0, 0, 0, 0.6);
+      }
+
+      button {
+        @include fw.button-style(
+          fw.$primary-color,
+          fw.$secondary-color,
+          fw.$accent-color
+        );
+
+        &.outline {
+          @include fw.button-style(white, fw.$text-color, fw.$accent-color);
+        }
+      }
+    }
+    & > :first-child,
+    & > :nth-child(2),
+    & > :nth-child(3) {
+      height: 95px;
+      > .error {
+        @include fw.error-style;
+        flex-direction: row;
+        text-align: left;
+      }
+    }
+  }
+}
