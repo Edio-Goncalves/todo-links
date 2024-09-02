@@ -10,9 +10,9 @@ rgba(255, 160, 72, 1) - para laranja
 rgba(75, 105, 255, 1) - para azul 
 */
 
-// .loading {
-//   @include fw.loading;
-// }
+.loading {
+  @include fw.loading;
+}
 
 .todo {
   width: 100%;
