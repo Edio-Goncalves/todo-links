@@ -28,14 +28,22 @@ firebase.auth().onAuthStateChanged((user) => {
 /* firestone.data */
 
 function findTodolinks(user) {
+  showLoading();
   firebase
     .firestore()
     .collection("todolinks")
     .where("user.uid", "==", user.uid)
+    .orderBy("linkName", "asc")
     .get()
     .then((snapshot) => {
+      hideLoading();
       const todoLinksData = snapshot.docs.map((doc) => doc.data());
       addTodolinksToScreen(todoLinksData);
+    })
+    .catch((error) => {
+      hideLoading();
+      console.log(error);
+      alert("Erro ao recuperar links do banco de dados");
     });
 }
 
