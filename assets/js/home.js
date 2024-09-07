@@ -297,3 +297,17 @@ function showNotification(message, type = "success") {
     notification.remove();
   }, 3000);
 }
+
+/* fecha modal */
+let modall = document.querySelector(".modal");
+
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("editModal");
+  const modalContent = document.querySelector(".modal-content");
+
+  modal.addEventListener("click", (e) => {
+    if (!modalContent.contains(e.target)) {
+      modal.style.display = "none";
+    }
+  });
+});
