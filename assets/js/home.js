@@ -1,4 +1,5 @@
 const form = {
+  notificationField: () => document.querySelector("#notificationField"),
   logout: () => document.querySelector("#logout"),
   send: () => document.querySelector("#send"),
   tbody: () => document.querySelector("#tbody"),
@@ -21,9 +22,22 @@ logout.addEventListener("click", () => {
       window.location.href = "../../index.html";
     })
     .catch(() => {
-      alert("erro ao fazer logout");
+      showNotification("Erro ao fazer logout", "error");
     });
 });
+
+/* Validação do formulário */
+function validateForm() {
+  if (
+    !form.link().value.trim() ||
+    !form.linkName().value.trim() ||
+    !form.tagName().value.trim()
+  ) {
+    showNotification("Todos os campos são obrigatórios.", "error");
+    return false;
+  }
+  return true;
+}
 
 /* envia cadastro */
 form.send().addEventListener("click", (e) => {
@@ -33,6 +47,10 @@ form.send().addEventListener("click", (e) => {
 
 /* coleta cadastro */
 function saveRegister() {
+  if (!validateForm()) {
+    return; // Sai da função se a validação falhar
+  }
+
   showLoading();
   const register = createCadastro();
 
@@ -40,14 +58,16 @@ function saveRegister() {
     .firestore()
     .collection("todolinks")
     .add(register)
-    .then(() => {
+    .then((docRef) => {
+      register.uid = docRef.id; // Define o UID gerado pelo Firestore
       hideLoading();
       addTodolinkToScreen(register);
       clearForm();
+      showNotification("Link cadastrado com sucesso!", "success");
     })
     .catch(() => {
       hideLoading();
-      alert("erro ao salvar link cadastrado");
+      showNotification("Erro ao salvar link cadastrado", "error");
     });
 }
 
@@ -89,60 +109,39 @@ function findTodolinks(user) {
     .catch((error) => {
       hideLoading();
       console.log(error);
-      alert("Erro ao recuperar links do banco de dados");
+      showNotification("Erro ao recuperar links do banco de dados", "error");
     });
 }
 
-/* Adiciona o evento de clique para abrir um modal ao clicar em "edit" */
-function addEditEventListeners() {
-  const modal = document.getElementById("editModal");
-  const closeModal = document.querySelector(".close");
+/* Delegação de eventos para editar e deletar */
+form.tbody().addEventListener("click", (event) => {
+  const target = event.target;
+  const row = target.closest("tr");
+  const uid = row?.dataset?.uid;
 
-  form.editList().forEach((editButton) => {
-    editButton.addEventListener("click", () => {
-      const row = editButton.closest("tr");
+  if (target.classList.contains("edit")) {
+    // Ação de editar
+    const linkName = row.querySelector("a").textContent;
+    const tag = row.querySelector(".tag").textContent;
 
-      // Armazena o ID do documento Firestore para posterior atualização
-      const uid = row.dataset.uid;
+    document.getElementById("editLinkName").value = linkName;
+    document.getElementById("editTag").value = tag;
 
-      const linkName = row.querySelector("a").textContent;
-      const tag = row.querySelector(".tag").textContent;
+    const modal = document.getElementById("editModal");
+    modal.dataset.uid = uid;
+    modal.style.display = "block";
+  }
 
-      document.getElementById("editLinkName").value = linkName;
-      document.getElementById("editTag").value = tag;
-
-      modal.dataset.uid = uid; // Armazena o ID do documento no modal
-      modal.style.display = "block";
-    });
-  });
-
-  // Fecha o modal ao clicar no "x"
-  closeModal.addEventListener("click", () => {
-    modal.style.display = "none";
-  });
-
-  // Fecha o modal se clicar fora do conteúdo
-  window.addEventListener("click", (event) => {
-    if (event.target == modal) {
-      modal.style.display = "none";
+  if (target.classList.contains("delete")) {
+    // Ação de deletar
+    const confirmDelete = confirm(
+      "Tem certeza de que deseja deletar este link?"
+    );
+    if (confirmDelete) {
+      deleteTodolink(uid, row);
     }
-  });
-
-  // Adiciona o evento de clique para exclusão
-  form.deleteList().forEach((deleteButton) => {
-    deleteButton.addEventListener("click", () => {
-      const row = deleteButton.closest("tr");
-      const uid = row.dataset.uid;
-
-      const confirmDelete = confirm(
-        "Tem certeza de que deseja deletar este link?"
-      );
-      if (confirmDelete) {
-        deleteTodolink(uid, row);
-      }
-    });
-  });
-}
+  }
+});
 
 /* Função para deletar o link do Firestore e da tela */
 function deleteTodolink(uid, row) {
@@ -154,13 +153,13 @@ function deleteTodolink(uid, row) {
     .delete()
     .then(() => {
       hideLoading();
-      alert("Link deletado com sucesso!");
+      showNotification("Link deletado com sucesso!", "success");
       row.remove();
     })
     .catch((error) => {
       hideLoading();
       console.error("Erro ao deletar link: ", error);
-      alert("Erro ao deletar o link");
+      showNotification("Erro ao deletar o link", "error");
     });
 }
 
@@ -185,7 +184,7 @@ document.getElementById("editForm").addEventListener("submit", (e) => {
     })
     .then(() => {
       hideLoading();
-      alert("Link atualizado com sucesso!");
+      showNotification("Link atualizado com sucesso!", "success");
 
       // Atualiza a exibição da tabela
       const row = document.querySelector(`tr[data-uid="${uid}"]`);
@@ -197,7 +196,7 @@ document.getElementById("editForm").addEventListener("submit", (e) => {
     .catch((error) => {
       hideLoading();
       console.error("Erro ao atualizar link: ", error);
-      alert("Erro ao atualizar o link");
+      showNotification("Erro ao atualizar o link", "error");
     });
 });
 
@@ -218,7 +217,6 @@ function addTodolinksToScreen(linksTodo) {
     `;
     table.appendChild(newRow);
   });
-  addEditEventListeners();
 }
 
 /* Adiciona um único link na tela */
@@ -236,5 +234,25 @@ function addTodolinkToScreen(e) {
     <th class="delete">🗑️</th>
   `;
   table.appendChild(newRow);
-  addEditEventListeners();
+}
+
+/* Limpa o formulário após enviar */
+function clearForm() {
+  form.link().value = "";
+  form.linkName().value = "";
+  form.tagName().value = "";
+}
+
+/* Função de notificação personalizada */
+function showNotification(message, type = "success") {
+  const notification = document.createElement("div");
+  notification.className = `notification ${type}`;
+  notification.textContent = message;
+
+  form.notificationField().appendChild(notification);
+  // document.body.appendChild(notification);
+
+  setTimeout(() => {
+    notification.remove();
+  }, 3000);
 }
