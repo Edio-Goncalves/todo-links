@@ -238,7 +238,7 @@ function addTodolinksToScreen(linksTodo) {
 
   linksTodo.forEach((e) => {
     const newRow = document.createElement("tr");
-    newRow.dataset.uid = e.uid;
+    newRow.dataset.uid = e.uid; // Armazena o ID do documento Firestore na linha
     newRow.innerHTML = `
       <th>
         <a href="${e.link}" target="_blank">${e.linkName}</a>
@@ -248,20 +248,15 @@ function addTodolinksToScreen(linksTodo) {
       <th class="delete">🗑️</th>
     `;
     table.appendChild(newRow);
-
-    if (!tagOption.includes(e.tag)) {
-      tagOption.push(e.tag);
-      updateTagOptions();
-    }
   });
 }
 
-/* Adiciona um único link à tela */
+/* Adiciona um único link na tela */
 function addTodolinkToScreen(e) {
   const table = form.tbody();
 
   const newRow = document.createElement("tr");
-  newRow.dataset.uid = e.uid;
+  newRow.dataset.uid = e.uid; // Armazena o ID do documento Firestore na linha
   newRow.innerHTML = `
     <th>
       <a href="${e.link}" target="_blank">${e.linkName}</a>
@@ -271,11 +266,6 @@ function addTodolinkToScreen(e) {
     <th class="delete">🗑️</th>
   `;
   table.appendChild(newRow);
-
-  if (!tagOption.includes(e.tag)) {
-    tagOption.push(e.tag);
-    updateTagOptions();
-  }
 }
 
 /* Limpa o formulário após enviar */
@@ -292,6 +282,7 @@ function showNotification(message, type = "success") {
   notification.textContent = message;
 
   form.notificationField().appendChild(notification);
+  // document.body.appendChild(notification);
 
   setTimeout(() => {
     notification.remove();
