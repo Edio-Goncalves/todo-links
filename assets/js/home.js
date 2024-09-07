@@ -26,29 +26,64 @@ logout.addEventListener("click", () => {
     });
 });
 
-/* Validação do formulário */
+/* validação */
 function validateForm() {
-  if (
-    !form.link().value.trim() ||
-    !form.linkName().value.trim() ||
-    !form.tagName().value.trim()
-  ) {
+  let link = form.link().value.trim();
+  const linkName = form.linkName().value.trim();
+  const tagName = form.tagName().value.trim();
+
+  // Verifica se todos os campos estão preenchidos
+  if (!link || !linkName || !tagName) {
     showNotification("Todos os campos são obrigatórios.", "error");
     return false;
   }
+
+  // Adiciona o esquema http:// se faltar
+  if (!/^https?:\/\//i.test(link)) {
+    link = `http://${link}`;
+  }
+
+  // Valida o URL
+  try {
+    new URL(link); // Tenta criar um URL para validar se é válido
+  } catch (_) {
+    showNotification("O link deve ser uma URL válida.", "error");
+    return false;
+  }
+
+  // Verifica o comprimento do nome do link
+  if (linkName.length > 24) {
+    showNotification(
+      "O nome do link deve ter no máximo 24 caracteres.",
+      "error"
+    );
+    return false;
+  }
+
+  // Verifica o comprimento da tag
+  if (tagName.length > 10) {
+    showNotification("A tag deve ter no máximo 10 caracteres.", "error");
+    return false;
+  }
+
+  // Atualiza o campo de link com o esquema correto
+  form.link().value = link;
+
   return true;
 }
 
-/* envia cadastro */
+/* Envia o formulário e redireciona */
 form.send().addEventListener("click", (e) => {
   e.preventDefault();
-  saveRegister();
+  if (validateForm()) {
+    saveRegister();
+  }
 });
 
-/* coleta cadastro */
+/* envia cadastro */
 function saveRegister() {
   if (!validateForm()) {
-    return; // Sai da função se a validação falhar
+    return;
   }
 
   showLoading();
@@ -59,7 +94,7 @@ function saveRegister() {
     .collection("todolinks")
     .add(register)
     .then((docRef) => {
-      register.uid = docRef.id; // Define o UID gerado pelo Firestore
+      register.uid = docRef.id;
       hideLoading();
       addTodolinkToScreen(register);
       clearForm();
@@ -120,7 +155,6 @@ form.tbody().addEventListener("click", (event) => {
   const uid = row?.dataset?.uid;
 
   if (target.classList.contains("edit")) {
-    // Ação de editar
     const linkName = row.querySelector("a").textContent;
     const tag = row.querySelector(".tag").textContent;
 
@@ -133,7 +167,6 @@ form.tbody().addEventListener("click", (event) => {
   }
 
   if (target.classList.contains("delete")) {
-    // Ação de deletar
     const confirmDelete = confirm(
       "Tem certeza de que deseja deletar este link?"
     );
@@ -186,7 +219,6 @@ document.getElementById("editForm").addEventListener("submit", (e) => {
       hideLoading();
       showNotification("Link atualizado com sucesso!", "success");
 
-      // Atualiza a exibição da tabela
       const row = document.querySelector(`tr[data-uid="${uid}"]`);
       row.querySelector("a").textContent = updatedLinkName;
       row.querySelector(".tag").textContent = updatedTag;
