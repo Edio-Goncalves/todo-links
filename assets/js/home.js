@@ -52,9 +52,9 @@ function validateForm() {
   }
 
   // Verifica o comprimento do nome do link
-  if (linkName.length > 24) {
+  if (linkName.length > 100) {
     showNotification(
-      "O nome do link deve ter no máximo 24 caracteres.",
+      "O nome do link deve ter no máximo 100 caracteres.",
       "error"
     );
     return false;
