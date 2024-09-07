@@ -28,7 +28,7 @@ const tagOption = [];
 /* Atualiza as opções de tag no <select> */
 function updateTagOptions() {
   const select = document.getElementById("tagSearch");
-  select.innerHTML = '<option value="">Selecione uma tag</option>';
+  select.innerHTML = `<option value=>All TAG's</option>`;
 
   tagOption.forEach((tag) => {
     const option = document.createElement("option");
