@@ -446,6 +446,7 @@ rgba(75, 105, 255, 1) - para azul
   table {
     margin-bottom: 40px;
     border-collapse: collapse;
+    width: 100%;
 
     tbody {
       tr {
@@ -456,6 +457,10 @@ rgba(75, 105, 255, 1) - para azul
           font-size: 13px;
           font-weight: 300;
           a {
+            padding-left: 5px;
+            width: 100%;
+            display: block;
+            text-align: left;
             cursor: pointer;
             font-weight: 500;
             text-decoration: none;
@@ -464,22 +469,25 @@ rgba(75, 105, 255, 1) - para azul
           }
         }
         .tag {
-          padding: 0px 10px;
+          padding: 0px 5px;
+          width: 20%;
+          font-size: 12px;
         }
         .edit {
           cursor: pointer;
           width: 25px;
           height: 25px;
-          background-image: url(/assets/image/svg/edit.svg);
+          // background-image: url(/assets/image/svg/edit.svg);
           background-repeat: no-repeat;
           background-position: center center;
           background-size: 18px;
         }
-        .delet {
+        .delete {
           cursor: pointer;
+
           width: 25px;
           height: 25px;
-          background-image: url(/assets/image/svg/trash.svg);
+          // background-image: url(/assets/image/svg/trash.svg);
           background-repeat: no-repeat;
           background-position: center center;
           background-size: 15px;
