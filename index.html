@@ -17,55 +17,61 @@
   </head>
   <body>
     <div class="login">
-      <h1>ToDo LINKS</h1>
       <form action="">
-        <div>
-          <label>Email</label>
-          <input
-            type="email"
-            name="e-mail"
-            id="email"
-            placeholder="seu@email.com"
-          />
+        <h1>TODO LINKS</h1>
+        <div class="wrap-input100">
+          <input type="email" name="e-mail" id="email" class="input100" />
+          <span class="focus-input100" data-placeholder="Email"></span>
           <div id="email-required-error" class="error">
             Email é obrigatório*
           </div>
           <div id="email-invalid-error" class="error">Email é inválido*</div>
+          <div id="email-required-error" class="error" style="display: none">
+            Campo de email é obrigatório*
+          </div>
         </div>
-        <div>
-          <label>Senha</label>
+
+        <div class="wrap-input100">
           <input
             type="password"
             name="password"
             id="password"
-            placeholder="senha"
+            class="input100"
           />
+          <span class="focus-input100" data-placeholder="Senha"></span>
           <div id="password-required-error" class="error">
             Senha é obrigatória*
           </div>
         </div>
 
-        <div>
-          <button
-            class="clear"
-            type="button"
-            id="recover-password-button"
-            disabled
-          >
+        <div class="btn-solid">
+          <div class="wr-solid">
+            <div class="wr-sol"></div>
+            <button
+              class="button-solid"
+              type="button"
+              id="login-button"
+              disabled
+            >
+              login
+            </button>
+          </div>
+        </div>
+
+        <div class="btn-clear">
+          <button class="clear" type="button" id="recover-password-button">
             Recuperar senha
           </button>
         </div>
-        <div>
-          <button class="solid" type="button" id="login-button" disabled>
-            Entrar
+
+        <div class="btn-outline">
+          <p>Não tem uma conta?</p>
+          <button class="outline" type="button" id="register">
+            Registrar-se
           </button>
-        </div>
-        <div>
-          <button class="outline" type="button" id="register">Registrar</button>
         </div>
       </form>
     </div>
-
     <script src="/assets/js/index.js"></script>
     <script src="/assets/js/loading.js"></script>
     <script src="/assets/js/validations.js"></script>

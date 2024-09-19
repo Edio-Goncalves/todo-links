@@ -127,3 +127,39 @@ function recoverPassword() {
       alert(getErrorMessage(error));
     });
 }
+
+/* valida a recuperação de email */
+function recoverPassword() {
+  if (form.email().value.trim() === "") {
+    form.emailRequiredError().style.display = "block";
+  } else {
+    form.emailRequiredError().style.display = "none";
+    showLoading();
+    firebase
+      .auth()
+      .sendPasswordResetEmail(form.email().value)
+      .then((response) => {
+        hideLoading();
+        alert("Email enviado com sucesso");
+      })
+      .catch((error) => {
+        hideLoading();
+        alert(getErrorMessage(error));
+      });
+  }
+}
+
+/* Ajusta CSS do login */
+document.addEventListener("DOMContentLoaded", function () {
+  var inputs = document.querySelectorAll(".input100");
+
+  inputs.forEach(function (input) {
+    input.addEventListener("input", function () {
+      if (this.value.trim() !== "") {
+        this.classList.add("has-val");
+      } else {
+        this.classList.remove("has-val");
+      }
+    });
+  });
+});
