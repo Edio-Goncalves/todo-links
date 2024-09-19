@@ -6,56 +6,115 @@ body {
   justify-content: center;
   align-items: center;
   font-family: "exo 2", sans-serif;
-
+  background: rgb(0, 161, 255);
+  background: linear-gradient(
+    180deg,
+    rgba(45, 223, 255, 0.6) 0%,
+    rgb(0, 161, 255) 100%
+  );
   .loading {
     @include fw.loading;
   }
+  &::before {
+    content: "";
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    background-image: url(/assets/image/figure/01.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    z-index: -1;
+    @media (max-width: 800px) {
+      background-size: cover;
+    }
+  }
 
   form {
-    width: 330px;
+    width: 100%;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 40px;
-    background-color: fw.$form-color;
+    background-color: #ffffff;
+    border-radius: 3px;
+    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.4);
 
-    border-radius: 10px;
+    > :first-child {
+      height: 120px;
+    }
+    > :nth-child(2) {
+      height: 120px;
+    }
+    > :nth-child(3) {
+      height: 90px;
+    }
 
     div {
       width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      input {
-        @include fw.input-style;
-      }
+      position: relative;
 
       label {
-        width: 100%;
-        font-size: 16px;
-        margin-bottom: 5px;
-        text-align: left;
-        color: rgba(0, 0, 0, 0.6);
+        display: block;
+        font-size: 15px;
+        color: #333;
       }
 
-      button {
-        @include fw.button-style(
-          fw.$primary-color,
-          fw.$secondary-color,
-          fw.$accent-color
-        );
+      input {
+        font-size: 15px;
+        color: #adadad;
+        line-height: 1.2;
+        display: block;
+        width: 100%;
+        height: 44px;
+        background: transparent;
+        padding: 0 5px;
+        border: none;
+        border-bottom: 1px solid #999999;
+        margin-bottom: 5px;
 
-        &.outline {
-          @include fw.button-style(white, fw.$text-color, fw.$accent-color);
+        &:focus {
+          box-shadow: 0 0 0 0;
+          outline: 0;
         }
       }
+
+      .error {
+        font-size: 13px;
+        color: #e74c3c;
+        display: none;
+      }
     }
-    & > :first-child,
-    & > :nth-child(2),
-    & > :nth-child(3) {
-      height: 95px;
-      > .error {
-        @include fw.error-style;
-        flex-direction: row;
-        text-align: left;
+
+    .solid,
+    .outline {
+      font-family: "Poppins", sans-serif;
+      display: flex;
+      align-items: center;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: all 0.4s;
+
+      &.solid,
+      &.outline {
+        background: transparent;
+        color: #007bff;
+        border: 1px solid #007bff;
+
+        &:hover {
+          color: #636363;
+          border-color: #636363;
+        }
       }
     }
   }

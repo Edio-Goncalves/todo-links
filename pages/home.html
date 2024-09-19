@@ -18,95 +18,101 @@
 
   <body>
     <div class="todo">
-      <header>
-        <h1>ToDo LINKS</h1>
-        <button type="button" id="logout">sair</button>
-      </header>
+      <div class="todo-wrapper">
+        <header>
+          <h1>ToDo LINKS</h1>
+          <button type="button" id="logout">sair</button>
+        </header>
 
-      <!-- cadastro -->
-      <section class="register">
-        <form id="formRegister" action="">
-          <h2>Cadastro:</h2>
-          <div class="wrapper-input">
-            <div class="form-inpt">
-              <span>https://</span>
-              <input
-                id="form-link"
-                class="form-field"
-                type="text"
-                placeholder="insira o link aqui"
-              />
+        <!-- cadastro -->
+        <section class="register">
+          <form id="formRegister" action="">
+            <h2>Cadastro:</h2>
+            <div class="wrapper-input">
+              <div class="form-inpt">
+                <span>https://</span>
+                <input
+                  id="form-link"
+                  class="form-field"
+                  type="text"
+                  placeholder="insira o link aqui"
+                />
+              </div>
+
+              <div class="form-inpt">
+                <span class="second">Nome</span>
+                <input
+                  id="form-name"
+                  class="form-field"
+                  type="text"
+                  placeholder="Máximo 100 caracteres"
+                  maxlength="100"
+                />
+              </div>
+
+              <div class="form-inpt">
+                <span class="second">Tag</span>
+                <input
+                  id="form-tag"
+                  class="form-field"
+                  type="text"
+                  placeholder="Máximo 10 caracteres"
+                  maxlength="10"
+                />
+              </div>
+
+              <button id="send">Concluir</button>
+              <div id="notificationField"></div>
             </div>
-
-            <div class="form-inpt">
-              <span class="second">Nome</span>
-              <input
-                id="form-name"
-                class="form-field"
-                type="text"
-                placeholder="Máximo 100 caracteres"
-                maxlength="100"
-              />
-            </div>
-
-            <div class="form-inpt">
-              <span class="second">Tag</span>
-              <input
-                id="form-tag"
-                class="form-field"
-                type="text"
-                placeholder="Máximo 10 caracteres"
-                maxlength="10"
-              />
-            </div>
-
-            <button id="send">Concluir</button>
-            <div id="notificationField"></div>
-          </div>
-        </form>
-      </section>
-
-      <!-- pesquisa -->
-      <section class="search">
-        <form action="">
-          <div>
-            <input type="search" id="searchInput" placeholder="Pesquisar" />
-          </div>
-          <select id="tagSearch">
-            <option value="">All TAG's</option>
-          </select>
-        </form>
-      </section>
-
-      <!-- listagem -->
-      <section class="listing">
-        <div class="list-header">
-          <h3>Nome | Tag | Edit/Del</h3>
-        </div>
-
-        <table>
-          <tbody id="tbody">
-            <!-- Linhas serão adicionadas aqui -->
-          </tbody>
-        </table>
-      </section>
-
-      <!-- Modal HTML -->
-      <div id="editModal" class="modal">
-        <div class="modal-content">
-          <h2>Edit Link</h2>
-          <form id="editForm">
-            <label for="editLinkName">Link Name:</label>
-            <input type="text" id="editLinkName" name="editLinkName" required />
-
-            <label for="editTag">Tag:</label>
-            <input type="text" id="editTag" name="editTag" required />
-
-            <button type="submit">Save</button>
           </form>
+        </section>
+
+        <!-- pesquisa -->
+        <section class="search">
+          <form action="">
+            <div>
+              <input type="search" id="searchInput" placeholder="Pesquisar" />
+            </div>
+            <select id="tagSearch">
+              <option value="">All TAG's</option>
+            </select>
+          </form>
+        </section>
+
+        <!-- listagem -->
+        <section class="listing">
+          <div class="list-header">
+            <h3>Nome | Tag | Edit/Del</h3>
+          </div>
+
+          <table>
+            <tbody id="tbody">
+              <!-- Linhas serão adicionadas aqui -->
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Modal HTML -->
+        <div id="editModal" class="modal">
+          <div class="modal-content">
+            <h2>Edit Link</h2>
+            <form id="editForm">
+              <label for="editLinkName">Link Name:</label>
+              <input
+                type="text"
+                id="editLinkName"
+                name="editLinkName"
+                required
+              />
+
+              <label for="editTag">Tag:</label>
+              <input type="text" id="editTag" name="editTag" required />
+
+              <button type="submit">Save</button>
+            </form>
+          </div>
         </div>
       </div>
-
       <!-- footer -->
       <footer class="footer">
         <h2>ToDo Link</h2>
