@@ -27,7 +27,7 @@ A interface foi projetada com um foco em usabilidade, simplicidade e eficiência
 
 ### Pré-requisitos
 
-- Conta no [Firebase](https://firebase.google.com/).
+- Conta e chaves no [Firebase](https://firebase.google.com/).
 - Clonar este repositório.
 
 ### Passos
