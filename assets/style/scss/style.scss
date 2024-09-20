@@ -280,6 +280,7 @@ body {
   background-size: contain;
   background: linear-gradient(left, #21d4fd, #2521ff);
   background: -webkit-linear-gradient(#21d5fd4b, #2521ff46);
+  padding: 10px;
   .todo-wrapper {
     width: 100%;
     max-width: 748px;
@@ -640,6 +641,7 @@ body {
     width: 100%;
     margin-top: 20px;
     background-color: #f7f7f7;
+    font-family: "Exo 2", sans-serif;
     h2 {
       font-size: 22px;
       color: rgba(28, 29, 34, 1);
